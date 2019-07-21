@@ -47,18 +47,20 @@ public class BuildOverInfo {
         //使用时间
         this.useTimeString = run.getTimestampString();
         //控制台地址
-        String jenkinsUrl = NotificationUtil.getJenkinsUrl();
-        String buildUrl = run.getUrl();
         StringBuilder urlBuilder = new StringBuilder();
-        urlBuilder.append(jenkinsUrl);
-        if(!jenkinsUrl.endsWith("/")){
-            urlBuilder.append("/");
+        String jenkinsUrl = NotificationUtil.getJenkinsUrl();
+        if(StringUtils.isNotEmpty(jenkinsUrl)){
+            String buildUrl = run.getUrl();
+            urlBuilder.append(jenkinsUrl);
+            if(!jenkinsUrl.endsWith("/")){
+                urlBuilder.append("/");
+            }
+            urlBuilder.append(buildUrl);
+            if(!buildUrl.endsWith("/")){
+                urlBuilder.append("/");
+            }
+            urlBuilder.append("console");
         }
-        urlBuilder.append(buildUrl);
-        if(!buildUrl.endsWith("/")){
-            urlBuilder.append("/");
-        }
-        urlBuilder.append("console");
         this.consoleUrl = urlBuilder.toString();
         //工程名称
         this.projectName = projectName;
@@ -78,7 +80,9 @@ public class BuildOverInfo {
         }
         content.append("<font color=\"info\">【" + this.projectName + "】</font>构建" + getStatus() + "\n");
         content.append(" >构建用时：<font color=\"comment\">" +  this.useTimeString + "</font>\n");
-        content.append(" >[查看控制台](" + this.consoleUrl + ")");
+        if(StringUtils.isNotEmpty(this.consoleUrl)) {
+            content.append(" >[查看控制台](" + this.consoleUrl + ")");
+        }
 
         Map markdown = new HashMap<String, Object>();
         markdown.put("content", content.toString());

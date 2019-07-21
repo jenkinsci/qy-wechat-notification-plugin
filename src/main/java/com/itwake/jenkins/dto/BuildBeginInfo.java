@@ -60,18 +60,20 @@ public class BuildBeginInfo {
             this.durationTime = build.getProject().getEstimatedDuration();
         }
         //控制台地址
-        String jenkinsUrl = NotificationUtil.getJenkinsUrl();
-        String buildUrl = build.getUrl();
         StringBuilder urlBuilder = new StringBuilder();
-        urlBuilder.append(jenkinsUrl);
-        if(!jenkinsUrl.endsWith("/")){
-            urlBuilder.append("/");
+        String jenkinsUrl = NotificationUtil.getJenkinsUrl();
+        if(StringUtils.isNotEmpty(jenkinsUrl)){
+            String buildUrl = build.getUrl();
+            urlBuilder.append(jenkinsUrl);
+            if(!jenkinsUrl.endsWith("/")){
+                urlBuilder.append("/");
+            }
+            urlBuilder.append(buildUrl);
+            if(!buildUrl.endsWith("/")){
+                urlBuilder.append("/");
+            }
+            urlBuilder.append("console");
         }
-        urlBuilder.append(buildUrl);
-        if(!buildUrl.endsWith("/")){
-            urlBuilder.append("/");
-        }
-        urlBuilder.append("console");
         this.consoleUrl = urlBuilder.toString();
         //工程名称
         this.projectName = projectName;
@@ -111,7 +113,9 @@ public class BuildBeginInfo {
         content.append("<font color=\"info\">【" + this.projectName + "】</font>开始构建\n");
         content.append(" >构建参数：<font color=\"comment\">" + paramBuffer.toString() + "</font>\n");
         content.append(" >预计用时：<font color=\"comment\">" +  durationTimeStr + "</font>\n");
-        content.append(" >[查看控制台](" + this.consoleUrl + ")");
+        if(StringUtils.isNotEmpty(this.consoleUrl)){
+            content.append(" >[查看控制台](" + this.consoleUrl + ")");
+        }
 
         Map markdown = new HashMap<String, Object>();
         markdown.put("content", content.toString());

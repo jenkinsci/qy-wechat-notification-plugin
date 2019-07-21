@@ -4,6 +4,7 @@ import com.itwake.jenkins.NotificationUtil;
 import com.itwake.jenkins.model.NotificationConfig;
 import hudson.model.Run;
 import net.sf.json.JSONObject;
+import org.apache.commons.lang.StringUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,18 +34,20 @@ public class BuildConsoleInfo {
 
     public BuildConsoleInfo(String projectName, Run<?, ?> run, NotificationConfig config){
         //控制台地址
-        String jenkinsUrl = NotificationUtil.getJenkinsUrl();
-        String buildUrl = run.getUrl();
         StringBuilder urlBuilder = new StringBuilder();
-        urlBuilder.append(jenkinsUrl);
-        if(!jenkinsUrl.endsWith("/")){
-            urlBuilder.append("/");
+        String jenkinsUrl = NotificationUtil.getJenkinsUrl();
+        if(StringUtils.isNotEmpty(jenkinsUrl)){
+            String buildUrl = run.getUrl();
+            urlBuilder.append(jenkinsUrl);
+            if(!jenkinsUrl.endsWith("/")){
+                urlBuilder.append("/");
+            }
+            urlBuilder.append(buildUrl);
+            if(!buildUrl.endsWith("/")){
+                urlBuilder.append("/");
+            }
+            urlBuilder.append("console");
         }
-        urlBuilder.append(buildUrl);
-        if(!buildUrl.endsWith("/")){
-            urlBuilder.append("/");
-        }
-        urlBuilder.append("console");
         this.consoleUrl = urlBuilder.toString();
         //工程名称
         this.projectName = projectName;
