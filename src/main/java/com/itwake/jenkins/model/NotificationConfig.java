@@ -1,5 +1,7 @@
 package com.itwake.jenkins.model;
 
+import hudson.util.Secret;
+
 /**
  * @author jiaju
  * @email jiaju@dvnuo.com
@@ -43,7 +45,7 @@ public class NotificationConfig {
     /**
      * 代理密码
      */
-    public String proxyPassword = "";
+    public Secret proxyPassword = null;
 
     /**
      * 仅在失败通知

@@ -7,9 +7,11 @@ import hudson.model.AbstractProject;
 import hudson.tasks.BuildStepDescriptor;
 import hudson.tasks.Publisher;
 import hudson.util.FormValidation;
+import hudson.util.Secret;
 import hudson.util.XStream2;
 import jenkins.model.Jenkins;
 import net.sf.json.JSONObject;
+import org.apache.commons.lang.StringUtils;
 import org.jenkinsci.Symbol;
 import org.kohsuke.stapler.QueryParameter;
 import org.kohsuke.stapler.StaplerRequest;
@@ -36,8 +38,8 @@ public class DescriptorImpl extends BuildStepDescriptor<Publisher> {
             load();
         } else {
             XStream2 xstream = new XStream2();
-            xstream.alias("hudson.plugins.humbug.DescriptorImpl", DescriptorImpl.class);
-            XmlFile oldConfig = new XmlFile(xstream, new File(Jenkins.getInstance().getRootDir(),"hudson.plugins.humbug.HumbugNotifier.xml"));
+            xstream.alias("com.itwake.jenkins.DescriptorImpl", DescriptorImpl.class);
+            XmlFile oldConfig = new XmlFile(xstream, new File(Jenkins.getInstance().getRootDir(),"com.itwake.jenkins.DescriptorImpl.xml"));
             if (oldConfig.exists()) {
                 try {
                     oldConfig.unmarshal(this);
@@ -121,11 +123,11 @@ public class DescriptorImpl extends BuildStepDescriptor<Publisher> {
     }
 
     public String getProxyPassword() {
-        return config.proxyPassword;
+        return Secret.toString(config.proxyPassword);
     }
 
     public void setProxyPassword(String proxyPassword) {
-        config.proxyPassword = proxyPassword;
+        config.proxyPassword = Secret.fromString(proxyPassword);
     }
 
     /**
@@ -161,18 +163,22 @@ public class DescriptorImpl extends BuildStepDescriptor<Publisher> {
     public FormValidation doTestProxy(@QueryParameter String proxyHost, @QueryParameter int proxyPort, @QueryParameter String proxyUsername, @QueryParameter String proxyPassword){
         String TEST_URL = "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=0";
 
+        if(StringUtils.isEmpty(proxyHost)){
+            return FormValidation.error("服务器不能为空");
+        }
+
         NotificationConfig buildConfig = new NotificationConfig();
         buildConfig.useProxy = true;
         buildConfig.proxyHost = proxyHost;
         buildConfig.proxyPort = proxyPort;
         buildConfig.proxyUsername = proxyUsername;
-        buildConfig.proxyPassword = proxyPassword;
+        buildConfig.proxyPassword = Secret.fromString(proxyPassword);
         try{
             NotificationUtil.push(TEST_URL, "", buildConfig);
             return FormValidation.ok("测试成功");
         } catch (HttpProcessException e) {
             e.printStackTrace();
-            return FormValidation.ok("连接异常" + e.getMessage());
+            return FormValidation.error("连接异常" + e.getMessage());
         }
     }
 
@@ -193,7 +199,7 @@ public class DescriptorImpl extends BuildStepDescriptor<Publisher> {
             config.proxyHost = jsonObject.getString("proxyHost");
             config.proxyPort = jsonObject.getInt("proxyPort");
             config.proxyUsername = jsonObject.getString("proxyUsername");
-            config.proxyPassword = jsonObject.getString("proxyPassword");
+            config.proxyPassword = Secret.fromString(jsonObject.getString("proxyPassword"));
         }
         save();
         return super.configure(req, json);

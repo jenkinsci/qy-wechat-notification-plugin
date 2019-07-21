@@ -5,6 +5,7 @@ import com.arronlong.httpclientutil.HttpClientUtil;
 import com.arronlong.httpclientutil.common.HttpConfig;
 import com.arronlong.httpclientutil.exception.HttpProcessException;
 import hudson.EnvVars;
+import hudson.util.Secret;
 import jenkins.model.Jenkins;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpHost;
@@ -34,10 +35,10 @@ public class NotificationUtil {
             HttpClient httpClient;
             HttpHost proxy = new HttpHost(buildConfig.proxyHost, buildConfig.proxyPort);
             //用户密码
-            if(StringUtils.isNotEmpty(buildConfig.proxyUsername) && StringUtils.isNotEmpty(buildConfig.proxyPassword)){
+            if(StringUtils.isNotEmpty(buildConfig.proxyUsername) && buildConfig.proxyPassword != null){
                 // 设置认证
                 CredentialsProvider provider = new BasicCredentialsProvider();
-                provider.setCredentials(new AuthScope(proxy), new UsernamePasswordCredentials(buildConfig.proxyUsername, buildConfig.proxyPassword));
+                provider.setCredentials(new AuthScope(proxy), new UsernamePasswordCredentials(buildConfig.proxyUsername, Secret.toString(buildConfig.proxyPassword)));
                 httpClient = HttpClients.custom().setDefaultCredentialsProvider(provider).setProxy(proxy).build();
             }else{
                 httpClient = HttpClients.custom().setProxy(proxy).build();
