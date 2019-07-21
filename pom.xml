@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.itwake.jenkins</groupId>
     <artifactId>qy-wechat-notification</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
     <packaging>hpi</packaging>
 
     <name>Qy Wechat Notification Plugin</name>
