@@ -10,19 +10,19 @@ qy-wechat-notification-1.0.0.hpi [点击下载安装](http://cdn.itwake.com/qy-w
 ## 项目配置
 
 先添加微信群机器人，得到Webhook地址
-![](http://cdn.itwake.com/15637075518533.jpg)
+![添加微信群机器人](http://cdn.itwake.com/15637075518533.jpg)
 
 将地址信息输入Jenkins中
-![](http://cdn.itwake.com/15637076950124.jpg)
+![将地址信息输入Jenkins中](http://cdn.itwake.com/15637076950124.jpg)
 
 构建开始通知
-![](http://cdn.itwake.com/15637078101376.jpg)
+![构建开始通知](http://cdn.itwake.com/15637078101376.jpg)
 
 构建成功通知
-![](http://cdn.itwake.com/15637078640589.jpg)
+![构建成功通知](http://cdn.itwake.com/15637078640589.jpg)
 
 构建失败通知
-![](http://cdn.itwake.com/15637079190249.jpg)
+![构建失败通知](http://cdn.itwake.com/15637079190249.jpg)
 
 项目运行
 ```
