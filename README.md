@@ -1,5 +1,5 @@
-# WeWork-notification
-WeWork Notification For Jenkins build
+# Qy-Wechat-Notification
+Qy  Wechat For Jenkins build
 
 > 企业微信Jenkins构建通知插件
 > 2019-07-13
