@@ -24,7 +24,7 @@ import java.util.logging.Logger;
 /**
  * Descriptor for {@link QyWechatNotification}
  */
-@Symbol("weworkNotification")
+@Symbol("qyWechatNotification")
 public class DescriptorImpl extends BuildStepDescriptor<Publisher> {
 
     private static final Logger logger = Logger.getLogger(DescriptorImpl.class.getName());
@@ -212,7 +212,7 @@ public class DescriptorImpl extends BuildStepDescriptor<Publisher> {
 
     @Override
     public String getHelpFile() {
-        return "/plugin/wework-notification/help.html";
+        return "/plugin/qy-wechat-notification/help.html";
     }
 
 }

@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?jelly escape-by-default='true'?>
 <j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
-    <f:entry title="Webhook地址" field="webhookUrl" help="/plugin/wework-notification/help-globalConfig-webhookUrl.html">
+    <f:entry title="Webhook地址" field="webhookUrl" help="/plugin/qy-wechat-notification/help-globalConfig-webhookUrl.html">
         <f:textbox />
     </f:entry>
-    <f:entry title="仅失败才@" field="failNotify" help="/plugin/wework-notification/help-globalConfig-failNotify.html">
+    <f:entry title="仅失败才@" field="failNotify" help="/plugin/qy-wechat-notification/help-globalConfig-failNotify.html">
         <f:checkbox />
     </f:entry>
-    <f:entry title="通知UserID" field="mentionedId" help="/plugin/wework-notification/help-globalConfig-mentionedId.html">
+    <f:entry title="通知UserID" field="mentionedId" help="/plugin/qy-wechat-notification/help-globalConfig-mentionedId.html">
         <f:textbox />
     </f:entry>
-    <f:entry title="通知手机号码" field="mentionedMobile" help="/plugin/wework-notification/help-globalConfig-mentionedMobile.html">
+    <f:entry title="通知手机号码" field="mentionedMobile" help="/plugin/qy-wechat-notification/help-globalConfig-mentionedMobile.html">
         <f:textbox />
     </f:entry>
 </j:jelly>

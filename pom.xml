@@ -46,7 +46,6 @@
             <artifactId>workflow-job</artifactId>
             <version>${jenkins.plugin.workflow.version}</version>
         </dependency>
-        <!-- For @Symbol named pipeline steps support -->
         <dependency>
             <groupId>org.jenkins-ci.plugins</groupId>
             <artifactId>structs</artifactId>

@@ -1,9 +1,9 @@
 package com.itwake.jenkins;
 
-import com.itwake.jenkins.model.NotificationConfig;
 import com.arronlong.httpclientutil.HttpClientUtil;
 import com.arronlong.httpclientutil.common.HttpConfig;
 import com.arronlong.httpclientutil.exception.HttpProcessException;
+import com.itwake.jenkins.model.NotificationConfig;
 import hudson.EnvVars;
 import hudson.util.Secret;
 import jenkins.model.Jenkins;
@@ -15,8 +15,6 @@ import org.apache.http.client.CredentialsProvider;
 import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.HttpClients;
-
-import java.io.PrintStream;
 
 /**
  * Static helper methods

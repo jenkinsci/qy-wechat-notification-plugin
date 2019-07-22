@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?jelly escape-by-default='true'?>
-<!--
-  This view is used to render the plugin list page.
-
-  Since we don't really have anything dynamic here, let's just use static HTML.
--->
 <div>
-  This plugin is a WeWork bot that can publish build statuses and send messages to WeWork.
+  This plugin is a bot that can publish build statuses and send messages to qy wechat.
 </div>
