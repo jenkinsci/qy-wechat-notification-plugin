@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.jenkins-ci.plugins</groupId>
         <artifactId>plugin</artifactId>
-        <version>3.19</version>
+        <version>3.43</version>
     </parent>
     <groupId>com.itwake.jenkins</groupId>
     <artifactId>qy-wechat-notification</artifactId>
@@ -18,7 +18,7 @@
     <url>https://github.com/itwake/qy-wechat-notification</url>
 
     <properties>
-        <jenkins.version>1.653</jenkins.version>
+        <jenkins.version>2.60.1</jenkins.version>
         <java.level>8</java.level>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jenkins.plugin.workflow.version>1.11</jenkins.plugin.workflow.version>
