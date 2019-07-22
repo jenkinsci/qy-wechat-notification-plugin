@@ -1,4 +1,4 @@
-# Qy-Wechat-Notification
+# Qy Wechat Notification Plugin
 
 > 企业微信Jenkins构建通知插件
 > 2019-07-13
