@@ -33,21 +33,7 @@ public class DescriptorImpl extends BuildStepDescriptor<Publisher> {
 
     public DescriptorImpl() {
         super(QyWechatNotification.class);
-        XmlFile newConfig = getConfigFile();
-        if (newConfig.exists()) {
-            load();
-        } else {
-            XStream2 xstream = new XStream2();
-            xstream.alias("com.itwake.jenkins.DescriptorImpl", DescriptorImpl.class);
-            XmlFile oldConfig = new XmlFile(xstream, new File(Jenkins.getInstance().getRootDir(),"com.itwake.jenkins.DescriptorImpl.xml"));
-            if (oldConfig.exists()) {
-                try {
-                    oldConfig.unmarshal(this);
-                } catch (IOException e) {
-                    logger.log(Level.WARNING, "Failed to load " + oldConfig, e);
-                }
-            }
-        }
+        load();
     }
 
     public String getWebhookUrl() {
