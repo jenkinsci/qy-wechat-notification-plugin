@@ -1,7 +1,7 @@
-package com.itwake.jenkins.dto;
+package org.jenkinsci.plugins.qywechat.dto;
 
-import com.itwake.jenkins.NotificationUtil;
-import com.itwake.jenkins.model.NotificationConfig;
+import org.jenkinsci.plugins.qywechat.NotificationUtil;
+import org.jenkinsci.plugins.qywechat.model.NotificationConfig;
 import hudson.model.AbstractBuild;
 import hudson.model.ParameterValue;
 import hudson.model.ParametersAction;

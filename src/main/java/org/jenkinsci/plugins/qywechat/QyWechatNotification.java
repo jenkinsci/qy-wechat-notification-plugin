@@ -1,9 +1,9 @@
-package com.itwake.jenkins;
+package org.jenkinsci.plugins.qywechat;
 
-import com.itwake.jenkins.dto.BuildBeginInfo;
-import com.itwake.jenkins.dto.BuildMentionedInfo;
-import com.itwake.jenkins.dto.BuildOverInfo;
-import com.itwake.jenkins.model.NotificationConfig;
+import org.jenkinsci.plugins.qywechat.dto.BuildBeginInfo;
+import org.jenkinsci.plugins.qywechat.dto.BuildMentionedInfo;
+import org.jenkinsci.plugins.qywechat.dto.BuildOverInfo;
+import org.jenkinsci.plugins.qywechat.model.NotificationConfig;
 import com.arronlong.httpclientutil.exception.HttpProcessException;
 import hudson.EnvVars;
 import hudson.Extension;

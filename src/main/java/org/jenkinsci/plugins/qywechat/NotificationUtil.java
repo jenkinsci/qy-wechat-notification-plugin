@@ -1,9 +1,9 @@
-package com.itwake.jenkins;
+package org.jenkinsci.plugins.qywechat;
 
 import com.arronlong.httpclientutil.HttpClientUtil;
 import com.arronlong.httpclientutil.common.HttpConfig;
 import com.arronlong.httpclientutil.exception.HttpProcessException;
-import com.itwake.jenkins.model.NotificationConfig;
+import org.jenkinsci.plugins.qywechat.model.NotificationConfig;
 import hudson.EnvVars;
 import hudson.util.Secret;
 import jenkins.model.Jenkins;

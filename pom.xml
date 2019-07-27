@@ -8,14 +8,13 @@
         <artifactId>plugin</artifactId>
         <version>3.43</version>
     </parent>
-    <groupId>com.itwake.jenkins</groupId>
     <artifactId>qy-wechat-notification</artifactId>
     <version>1.0.0</version>
     <packaging>hpi</packaging>
 
     <name>Qy Wechat Notification Plugin</name>
     <description>A build status notifier that sends notifications to Qy Wechat</description>
-    <url>https://github.com/itwake/qy-wechat-notification</url>
+    <url>https://github.com/jenkinsci/qy-wechat-notification-plugin</url>
 
     <properties>
         <jenkins.version>2.60.1</jenkins.version>

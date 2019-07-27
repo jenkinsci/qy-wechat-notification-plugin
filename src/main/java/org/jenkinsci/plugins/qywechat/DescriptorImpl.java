@@ -1,24 +1,18 @@
-package com.itwake.jenkins;
+package org.jenkinsci.plugins.qywechat;
 
-import com.itwake.jenkins.model.NotificationConfig;
+import org.jenkinsci.plugins.qywechat.model.NotificationConfig;
 import com.arronlong.httpclientutil.exception.HttpProcessException;
-import hudson.XmlFile;
 import hudson.model.AbstractProject;
 import hudson.tasks.BuildStepDescriptor;
 import hudson.tasks.Publisher;
 import hudson.util.FormValidation;
 import hudson.util.Secret;
-import hudson.util.XStream2;
-import jenkins.model.Jenkins;
 import net.sf.json.JSONObject;
 import org.apache.commons.lang.StringUtils;
 import org.jenkinsci.Symbol;
 import org.kohsuke.stapler.QueryParameter;
 import org.kohsuke.stapler.StaplerRequest;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**

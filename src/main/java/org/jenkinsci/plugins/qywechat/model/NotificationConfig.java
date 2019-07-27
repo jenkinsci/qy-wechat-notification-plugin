@@ -1,4 +1,4 @@
-package com.itwake.jenkins.model;
+package org.jenkinsci.plugins.qywechat.model;
 
 import hudson.util.Secret;
 
