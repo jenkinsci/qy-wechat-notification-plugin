@@ -14,7 +14,7 @@
 
     <name>Qy Wechat Notification Plugin</name>
     <description>A build status notifier that sends notifications to Qy Wechat</description>
-    <url>https://github.com/jenkinsci/qy-wechat-notification-plugin</url>
+    <url>https://wiki.jenkins.io/display/JENKINS/Qy+Wechat+Notification+Plugin</url>
 
     <properties>
         <jenkins.version>2.60.1</jenkins.version>
