@@ -56,8 +56,4 @@
         </dependency>
     </dependencies>
 
-
-  <scm>
-    <tag>qy-wechat-notification-1.0.0</tag>
-  </scm>
 </project>
