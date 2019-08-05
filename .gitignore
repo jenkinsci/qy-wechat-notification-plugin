@@ -5,6 +5,3 @@ target
 .idea
 *.iml
 work
-
-pom.xml.releaseBackup
-release.properties
