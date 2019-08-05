@@ -4,8 +4,6 @@ import hudson.util.Secret;
 
 /**
  * @author jiaju
- * @email jiaju@dvnuo.com
- * @date 2019/7/14 16:35
  */
 public class NotificationConfig {
 
