@@ -13,8 +13,6 @@ import java.util.Map;
 /**
  * 结束构建通知
  * @author jiaju
- * @email jiaju@dvnuo.com
- * @date 2019/7/13 16:00
  */
 public class BuildOverInfo {
 

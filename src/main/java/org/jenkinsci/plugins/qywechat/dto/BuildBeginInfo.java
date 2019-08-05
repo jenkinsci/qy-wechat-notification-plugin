@@ -15,8 +15,6 @@ import java.util.Map;
 /**
  * 开始构建信息
  * @author jiaju
- * @email jiaju@dvnuo.com
- * @date 2019/7/13 16:00
  */
 public class BuildBeginInfo {
 
