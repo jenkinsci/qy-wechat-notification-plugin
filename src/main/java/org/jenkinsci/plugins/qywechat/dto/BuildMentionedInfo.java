@@ -30,8 +30,6 @@ public class BuildMentionedInfo {
     String mentionedMobile = "";
 
     public BuildMentionedInfo(Run<?, ?> run, NotificationConfig config){
-        //结果
-        Result result = run.getResult();
         //通知ID
         if(config.mentionedId!=null){
             mentionedId = config.mentionedId;

@@ -86,12 +86,12 @@ public class BuildBeginInfo {
     public String toJSONString(){
         //参数组装
         StringBuffer paramBuffer = new StringBuffer();
-        for(Object key : params.keySet()){
+        params.forEach((key, val)->{
             paramBuffer.append(key);
             paramBuffer.append("=");
-            paramBuffer.append(params.get(key));
+            paramBuffer.append(val);
             paramBuffer.append(", ");
-        }
+        });
         if(paramBuffer.length()==0){
             paramBuffer.append("无");
         }else{

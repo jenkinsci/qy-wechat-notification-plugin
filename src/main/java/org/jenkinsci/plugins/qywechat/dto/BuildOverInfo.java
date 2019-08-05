@@ -96,7 +96,7 @@ public class BuildOverInfo {
     }
 
     private String getStatus(){
-        if(result.equals(Result.FAILURE)){
+        if(null != result && result.equals(Result.FAILURE)){
             return "<font color=\"warning\">失败!!!</font>\uD83D\uDE2D";
         }else if(null != result && result.equals(Result.ABORTED)){
             return "<font color=\"warning\">中断!!</font>\uD83D\uDE28";
