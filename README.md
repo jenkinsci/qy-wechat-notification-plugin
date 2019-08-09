@@ -3,9 +3,7 @@
 [![Build Status](https://ci.jenkins.io/buildStatus/icon?job=Plugins%2Fqy-wechat-notification-plugin%2Fmaster)](https://ci.jenkins.io/job/Plugins/job/qy-wechat-notification-plugin/job/master/)
 [![Jenkins Plugin](https://img.shields.io/jenkins/plugin/v/qy-wechat-notification.svg)](https://plugins.jenkins.io/qy-wechat-notification-plugin)
 
-## 下载安装
 
-qy-wechat-notification-1.0.0.hpi [点击下载安装](http://cdn.itwake.com/qy-wechat-notification/qy-wechat-notification-1.0.0.hpi)
 
 ## 项目配置
 
