@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 开始构建信息
+ * 开始构建的通知信息
  * @author jiaju
  */
 public class BuildBeginInfo {
@@ -21,27 +21,27 @@ public class BuildBeginInfo {
     /**
      * 请求参数
      */
-    Map params = new HashMap<String, Object>();
+    private Map params = new HashMap<String, Object>();
 
     /**
      * 预计时间，毫秒
      */
-    Long durationTime = 0L;
+    private Long durationTime = 0L;
 
     /**
      * 本次构建控制台地址
      */
-    String consoleUrl;
+    private String consoleUrl;
 
     /**
      * 工程名称
      */
-    String projectName;
+    private String projectName;
 
     /**
      * 环境名称
      */
-    String topicName = "";
+    private String topicName = "";
 
     public BuildBeginInfo(String projectName, AbstractBuild<?, ?> build, NotificationConfig config){
         //获取请求参数

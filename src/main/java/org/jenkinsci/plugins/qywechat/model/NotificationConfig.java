@@ -3,6 +3,7 @@ package org.jenkinsci.plugins.qywechat.model;
 import hudson.util.Secret;
 
 /**
+ * 配置项
  * @author jiaju
  */
 public class NotificationConfig {

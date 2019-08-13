@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * `@`用户的通知
  * @author jiaju
  */
 public class BuildMentionedInfo {
@@ -19,12 +20,12 @@ public class BuildMentionedInfo {
     /**
      * 通知ID
      */
-    String mentionedId = "";
+    private String mentionedId = "";
 
     /**
      * 通知手机号码
      */
-    String mentionedMobile = "";
+    private String mentionedMobile = "";
 
     public BuildMentionedInfo(Run<?, ?> run, NotificationConfig config){
         //通知ID

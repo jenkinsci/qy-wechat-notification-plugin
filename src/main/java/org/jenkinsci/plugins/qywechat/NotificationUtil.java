@@ -17,7 +17,8 @@ import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.HttpClients;
 
 /**
- * Static helper methods
+ * 工具类
+ * @author jiaju
  */
 public class NotificationUtil {
 

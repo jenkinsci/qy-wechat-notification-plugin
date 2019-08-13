@@ -16,7 +16,8 @@ import org.kohsuke.stapler.StaplerRequest;
 import java.util.logging.Logger;
 
 /**
- * Descriptor for {@link QyWechatNotification}
+ * 数据绑定
+ * @author jiaju
  */
 @Symbol("qyWechatNotification")
 public class DescriptorImpl extends BuildStepDescriptor<Publisher> {

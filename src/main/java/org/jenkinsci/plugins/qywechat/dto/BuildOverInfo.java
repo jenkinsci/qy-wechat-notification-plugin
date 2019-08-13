@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 结束构建通知
+ * 结束构建的通知信息
  * @author jiaju
  */
 public class BuildOverInfo {
@@ -19,27 +19,27 @@ public class BuildOverInfo {
     /**
      * 使用时间，毫秒
      */
-    String useTimeString = "";
+    private String useTimeString = "";
 
     /**
      * 本次构建控制台地址
      */
-    String consoleUrl;
+    private String consoleUrl;
 
     /**
      * 工程名称
      */
-    String projectName;
+    private String projectName;
 
     /**
      * 环境名称
      */
-    String topicName = "";
+    private String topicName = "";
 
     /**
      * 执行结果
      */
-    Result result;
+    private Result result;
 
     public BuildOverInfo(String projectName, Run<?, ?> run, NotificationConfig config){
         //使用时间
