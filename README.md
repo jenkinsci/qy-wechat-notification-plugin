@@ -20,7 +20,7 @@
 ## 项目配置
 
 在Jenkins项目底部的`构建后操作`，添加`企业微信通知配置`
-![添加微信群机器人](http://cdn.itwake.com/FpMR-AYfcUNZDSejcMjh9xtI8wqS.png)
+![添加微信群机器人](http://cdn.itwake.com/Fnz3LqHVE7kwG6CLblrMUJ1tfEve.png)
 
 将Webhook地址信息输入Jenkins中，即可完成最简单配置
 ![将地址信息输入Jenkins中](http://cdn.itwake.com/15637076950124.jpg)
