@@ -188,7 +188,7 @@ public class DescriptorImpl extends BuildStepDescriptor<Publisher> {
 
     @Override
     public String getDisplayName() {
-        return "企业微信通知配置";
+        return "企业微信通知";
     }
 
     @Override

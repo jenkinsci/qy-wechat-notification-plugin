@@ -3,26 +3,40 @@
 [![Build Status](https://ci.jenkins.io/buildStatus/icon?job=Plugins%2Fqy-wechat-notification-plugin%2Fmaster)](https://ci.jenkins.io/job/Plugins/job/qy-wechat-notification-plugin/job/master/)
 [![Jenkins Plugin](https://img.shields.io/jenkins/plugin/v/qy-wechat-notification.svg)](https://plugins.jenkins.io/qy-wechat-notification-plugin)
 
+> 该插件适用于使用了"企业微信"工作的小伙伴
+>
+> 需要不低于企业微信 2.8.7版本
 
+## 添加群机器人
+
+任意群成员，都可以通过`右键`群名称的进行添加群机器人
+
+![添加微信机器人](http://cdn.itwake.com/mweb/20190813/15656561814910.jpg)
+
+企业微信会给新增加的群机器人分配一个Webhook，作为通知接口
+
+![添加微信群机器人](http://cdn.itwake.com/FjyselmMyd45a2dMDPD0rYPyJvn9.png)
 
 ## 项目配置
 
-先添加微信群机器人，得到Webhook地址
-![添加微信群机器人](http://cdn.itwake.com/15637075518533.jpg)
+在Jenkins项目底部的`构建后操作`，添加`企业微信通知配置`
+![添加微信群机器人](http://cdn.itwake.com/FpMR-AYfcUNZDSejcMjh9xtI8wqS.png)
 
-将地址信息输入Jenkins中
+将Webhook地址信息输入Jenkins中，即可完成最简单配置
 ![将地址信息输入Jenkins中](http://cdn.itwake.com/15637076950124.jpg)
 
-构建开始通知
-![构建开始通知](http://cdn.itwake.com/15637078101376.jpg)
+## 运行效果
 
-构建成功通知
-![构建成功通知](http://cdn.itwake.com/15637078640589.jpg)
+在构建开始的时候，群机器人会执行开始构建通知
+![构建开始通知](http://cdn.itwake.com/FqztU6i9mJd6NOdvdkR_H-E2bd7c.png)
 
-构建失败通知
-![构建失败通知](http://cdn.itwake.com/15637079190249.jpg)
+构建成功后，群机器人会执行构建成功的通知
+![构建成功通知](http://cdn.itwake.com/Ft9p4--ek2U1sXXLeq4AteIK4EuK.png)
 
-项目运行
+构建失败时，群机器人则会执行失败的通知
+![构建失败通知](http://cdn.itwake.com/Fr34HIw4g--6Mcln_WpY89wkXE0H.png)
+
+## 项目开发
 ```
 mvn org.jenkins-ci.tools:maven-hpi-plugin:run
 ```
