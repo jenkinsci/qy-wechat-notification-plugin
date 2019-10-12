@@ -112,6 +112,11 @@ public class QyWechatNotification extends Publisher implements SimpleBuildStep {
 
         //仅在失败的时候，才进行@
         if(!result.equals(Result.SUCCESS) || !config.failNotify){
+            //没有填写UserId和手机号码
+            if(StringUtils.isEmpty(config.mentionedId) && StringUtils.isEmpty(config.mentionedMobile)){
+                return;
+            }
+
             //构建@通知
             BuildMentionedInfo consoleInfo = new BuildMentionedInfo(run, config);
 
