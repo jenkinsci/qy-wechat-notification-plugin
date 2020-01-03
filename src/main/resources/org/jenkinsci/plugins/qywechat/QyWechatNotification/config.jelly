@@ -7,6 +7,21 @@
     <f:entry title="仅失败才@" field="failNotify" help="/plugin/qy-wechat-notification/help-globalConfig-failNotify.html">
         <f:checkbox />
     </f:entry>
+    <f:entry title="发送开始构建信息" field="startBuild" help="/plugin/qy-wechat-notification/help-config-startBuild.html">
+        <f:checkbox />
+    </f:entry>
+    <f:entry title="仅失败才发送" field="failSend" help="/plugin/qy-wechat-notification/help-config-failSend.html">
+        <f:checkbox />
+    </f:entry>
+    <f:entry title="仅成功才发送" field="successSend" help="/plugin/qy-wechat-notification/help-config-successSend.html">
+        <f:checkbox />
+    </f:entry>
+    <f:entry title="仅构建中断才发送" field="aboutSend" help="/plugin/qy-wechat-notification/help-config-aboutSend.html">
+        <f:checkbox />
+    </f:entry>
+    <f:entry title="仅不稳定构建才发送" field="unstableSend" help="/plugin/qy-wechat-notification/help-config-unstableSend.html">
+        <f:checkbox />
+    </f:entry>
     <f:entry title="通知UserID" field="mentionedId" help="/plugin/qy-wechat-notification/help-globalConfig-mentionedId.html">
         <f:textbox />
     </f:entry>

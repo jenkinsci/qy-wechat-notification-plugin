@@ -111,6 +111,46 @@ public class DescriptorImpl extends BuildStepDescriptor<Publisher> {
         config.proxyPassword = Secret.fromString(proxyPassword);
     }
 
+    public boolean isFailSend() {
+        return config.failSend;
+    }
+
+    public void setFailSend(boolean failSend) {
+        config.failSend = failSend;
+    }
+
+    public boolean isSuccessSend() {
+        return config.successSend;
+    }
+
+    public void setSuccessSend(boolean successSend) {
+        config.successSend = successSend;
+    }
+
+    public boolean isAboutSend() {
+        return config.aboutSend;
+    }
+
+    public void setAboutSend(boolean aboutSend) {
+        config.aboutSend = aboutSend;
+    }
+
+    public boolean isUnstableSend() {
+        return config.unstableSend;
+    }
+
+    public void setUnstableSend(boolean unstableSend) {
+        config.unstableSend = unstableSend;
+    }
+
+    public boolean isStartBuild() {
+        return config.startBuild;
+    }
+
+    public void setStartBuild(boolean startBuild) {
+        config.startBuild = startBuild;
+    }
+
     /**
      * 获取配置，不用于保存
      * @return
@@ -130,6 +170,12 @@ public class DescriptorImpl extends BuildStepDescriptor<Publisher> {
         unsaveConfig.proxyPassword = config.proxyPassword;
 
         unsaveConfig.failNotify = config.failNotify;
+        unsaveConfig.failSend = config.failSend;
+        unsaveConfig.aboutSend = config.aboutSend;
+        unsaveConfig.successSend = config.successSend;
+        unsaveConfig.unstableSend = config.unstableSend;
+        unsaveConfig.startBuild = config.startBuild;
+
         return unsaveConfig;
     }
 

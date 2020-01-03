@@ -23,7 +23,15 @@
 ![添加微信群机器人](http://cdn.itwake.com/Fnz3LqHVE7kwG6CLblrMUJ1tfEve.png)
 
 将Webhook地址信息输入Jenkins中，即可完成最简单配置
-![将地址信息输入Jenkins中](http://cdn.itwake.com/15637076950124.jpg)
+![将地址信息输入Jenkins中](./pic/panel.jpg)
+
+可配置的控制项：
+- 是否仅失败才发送信息
+- 是否仅成功才发送信息
+- 是否仅中断才发送信息
+- 是否仅不稳定构建才发送信息
+- 是否仅失败才@
+- 是否发送开始构建信息
 
 ## 运行效果
 

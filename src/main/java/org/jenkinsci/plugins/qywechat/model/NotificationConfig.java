@@ -47,8 +47,32 @@ public class NotificationConfig {
     public Secret proxyPassword = null;
 
     /**
-     * 仅在失败通知
+     * 仅在失败@
      */
     public boolean failNotify = false;
 
+    /**
+     * 发送开始构建消息
+     */
+    public boolean startBuild = false;
+
+    /**
+     * 仅在失败时发送
+     */
+    public boolean failSend = false;
+
+    /**
+     * 仅在成功时发送
+     */
+    public boolean successSend = false;
+
+    /**
+     * 仅在构建中断时发送
+     */
+    public boolean aboutSend = false;
+
+    /**
+     * 仅在不稳定构建时发送
+     */
+    public boolean unstableSend = false;
 }
