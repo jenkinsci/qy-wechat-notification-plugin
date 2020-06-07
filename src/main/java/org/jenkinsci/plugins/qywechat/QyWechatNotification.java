@@ -105,6 +105,11 @@ public class QyWechatNotification extends Publisher implements SimpleBuildStep {
         push(listener.getLogger(), config.webhookUrl, req, config);
         listener.getLogger().println("项目运行结果[" + result + "]");
 
+        //运行不成功
+        if(result==null){
+            return;
+        }
+
         //仅在失败的时候，才进行@
         if(!result.equals(Result.SUCCESS) || !config.failNotify){
             //没有填写UserId和手机号码
