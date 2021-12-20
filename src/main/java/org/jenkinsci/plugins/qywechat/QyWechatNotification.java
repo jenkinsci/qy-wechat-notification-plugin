@@ -19,6 +19,8 @@ import org.kohsuke.stapler.DataBoundSetter;
 
 import java.io.IOException;
 import java.io.PrintStream;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
 
 /**
  * 企业微信构建通知
@@ -143,7 +145,7 @@ public class QyWechatNotification extends Publisher implements SimpleBuildStep {
             try {
                 String msg = NotificationUtil.push(u, data, config);
                 logger.println("通知结果" + msg);
-            }catch (HttpProcessException e){
+            }catch (HttpProcessException | KeyManagementException | NoSuchAlgorithmException e) {
                 logger.println("通知异常" + e.getMessage());
                 e.printStackTrace();
             }

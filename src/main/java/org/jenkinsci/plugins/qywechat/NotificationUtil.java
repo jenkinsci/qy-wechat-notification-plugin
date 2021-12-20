@@ -3,7 +3,6 @@ package org.jenkinsci.plugins.qywechat;
 import com.arronlong.httpclientutil.HttpClientUtil;
 import com.arronlong.httpclientutil.common.HttpConfig;
 import com.arronlong.httpclientutil.exception.HttpProcessException;
-import org.jenkinsci.plugins.qywechat.model.NotificationConfig;
 import hudson.EnvVars;
 import hudson.util.Secret;
 import jenkins.model.Jenkins;
@@ -13,8 +12,17 @@ import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.CredentialsProvider;
 import org.apache.http.client.HttpClient;
+import org.apache.http.conn.ssl.NoopHostnameVerifier;
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.impl.client.BasicCredentialsProvider;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.ssl.SSLContexts;
+import org.jenkinsci.plugins.qywechat.model.NotificationConfig;
+
+import javax.net.ssl.SSLContext;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
 
 /**
  * 工具类
@@ -27,26 +35,38 @@ public class NotificationUtil {
      * @param url
      * @param data
      */
-    public static String push(String url, String data, NotificationConfig buildConfig) throws HttpProcessException {
+    public static String push(String url, String data, NotificationConfig buildConfig) throws HttpProcessException, KeyManagementException, NoSuchAlgorithmException {
         HttpConfig httpConfig;
+        HttpClient httpClient;
+        HttpClientBuilder httpClientBuilder = HttpClients.custom();
+        if(url.startsWith("https")) {
+            SSLContext sslContext = SSLContexts.custom().build();
+            SSLConnectionSocketFactory sslConnectionSocketFactory = new SSLConnectionSocketFactory(
+                    sslContext,
+                    new String[]{"TLSv1", "TLSv1.1", "TLSv1.2"},
+                    null,
+                    NoopHostnameVerifier.INSTANCE
+            );
+            httpClientBuilder.setSSLSocketFactory(sslConnectionSocketFactory);
+        }
         //使用代理请求
         if(buildConfig.useProxy){
-            HttpClient httpClient;
             HttpHost proxy = new HttpHost(buildConfig.proxyHost, buildConfig.proxyPort);
             //用户密码
             if(StringUtils.isNotEmpty(buildConfig.proxyUsername) && buildConfig.proxyPassword != null){
                 // 设置认证
                 CredentialsProvider provider = new BasicCredentialsProvider();
                 provider.setCredentials(new AuthScope(proxy), new UsernamePasswordCredentials(buildConfig.proxyUsername, Secret.toString(buildConfig.proxyPassword)));
-                httpClient = HttpClients.custom().setDefaultCredentialsProvider(provider).setProxy(proxy).build();
+                httpClient = httpClientBuilder.setDefaultCredentialsProvider(provider).setProxy(proxy).build();
             }else{
-                httpClient = HttpClients.custom().setProxy(proxy).build();
+                httpClient = httpClientBuilder.setProxy(proxy).build();
             }
             //代理请求
             httpConfig = HttpConfig.custom().client(httpClient).url(url).json(data).encoding("utf-8");
         }else{
+            httpClient = httpClientBuilder.build();
             //普通请求
-            httpConfig = HttpConfig.custom().url(url).json(data).encoding("utf-8");
+            httpConfig = HttpConfig.custom().client(httpClient).url(url).json(data).encoding("utf-8");
         }
 
         String result = HttpClientUtil.post(httpConfig);
