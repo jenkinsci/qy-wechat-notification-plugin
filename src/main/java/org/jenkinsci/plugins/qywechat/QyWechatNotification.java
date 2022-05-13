@@ -34,6 +34,8 @@ public class QyWechatNotification extends Publisher implements SimpleBuildStep {
 
     private String mentionedMobile;
 
+    private String moreInfo;
+
     private boolean failNotify;
 
     private String projectName;
@@ -60,6 +62,9 @@ public class QyWechatNotification extends Publisher implements SimpleBuildStep {
             listener.getLogger().println("读取环境变量异常" + e.getMessage());
             envVars = new EnvVars();
         }
+        envVars.forEach((k,v)->{
+            listener.getLogger().println(k+":"+v);
+        });
         NotificationConfig config = getConfig(envVars);
         if(StringUtils.isEmpty(config.webhookUrl)){
             return true;
@@ -173,6 +178,9 @@ public class QyWechatNotification extends Publisher implements SimpleBuildStep {
         if(StringUtils.isNotEmpty(mentionedMobile)){
             config.mentionedMobile = mentionedMobile;
         }
+        if (StringUtils.isNotEmpty(moreInfo)){
+            config.moreInfo = moreInfo;
+        }
         config.failNotify = failNotify;
         //使用环境变量
         if(config.webhookUrl.contains("$")){
@@ -186,6 +194,10 @@ public class QyWechatNotification extends Publisher implements SimpleBuildStep {
         if(config.mentionedMobile.contains("$")){
             String val = NotificationUtil.replaceMultipleEnvValue(config.mentionedMobile, envVars);
             config.mentionedMobile = val;
+        }
+        if(config.moreInfo.contains("$")){
+            String val = NotificationUtil.replaceEnvs(config.moreInfo, envVars);
+            config.moreInfo = val;
         }
         return config;
     }
@@ -212,6 +224,9 @@ public class QyWechatNotification extends Publisher implements SimpleBuildStep {
         this.failNotify = failNotify;
     }
 
+    @DataBoundSetter
+    public void setMoreInfo(String moreInfo){this.moreInfo = moreInfo;}
+
     public String getWebhookUrl() {
         return webhookUrl;
     }
@@ -227,5 +242,7 @@ public class QyWechatNotification extends Publisher implements SimpleBuildStep {
     public boolean isFailNotify() {
         return failNotify;
     }
+
+    public String getMoreInfo() {return moreInfo;}
 }
 

@@ -43,6 +43,11 @@ public class BuildBeginInfo {
      */
     private String topicName = "";
 
+    /**
+     * 更多自定消息
+     */
+    private String moreInfo = "";
+
     public BuildBeginInfo(String projectName, AbstractBuild<?, ?> build, NotificationConfig config){
         //获取请求参数
         List<ParametersAction> parameterList = build.getActions(ParametersAction.class);
@@ -79,6 +84,9 @@ public class BuildBeginInfo {
         if(config.topicName!=null){
             topicName = config.topicName;
         }
+        if (StringUtils.isNotEmpty(config.moreInfo)){
+            moreInfo = config.moreInfo;
+        }
     }
 
     public String toJSONString(){
@@ -111,6 +119,9 @@ public class BuildBeginInfo {
         content.append("<font color=\"info\">【" + this.projectName + "】</font>开始构建\n");
         content.append(" >构建参数：<font color=\"comment\">" + paramBuffer.toString() + "</font>\n");
         content.append(" >预计用时：<font color=\"comment\">" +  durationTimeStr + "</font>\n");
+        if (StringUtils.isNotEmpty(moreInfo)){
+            content.append(" >"+moreInfo+"\n");
+        }
         if(StringUtils.isNotEmpty(this.consoleUrl)){
             content.append(" >[查看控制台](" + this.consoleUrl + ")");
         }

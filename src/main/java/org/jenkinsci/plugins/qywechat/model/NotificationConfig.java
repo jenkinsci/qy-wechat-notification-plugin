@@ -20,6 +20,11 @@ public class NotificationConfig {
      * 通知用户手机
      */
     public String mentionedMobile = "";
+
+    /**
+     * 更多信息备注
+     */
+    public String moreInfo = "";
     /**
      * 主题名称
      */
