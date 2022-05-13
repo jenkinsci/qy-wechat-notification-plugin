@@ -40,10 +40,10 @@ pipeline {
     }
     post{
         success{
-            qyWechatNotification failNotify: true, mentionedId: '需要通知UserID', mentionedMobile: '需要通知的通知手机号码', webhookUrl: 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=xxx-xxxxxx-xxxxxx'
+            qyWechatNotification failNotify: true, mentionedId: '需要通知UserID', mentionedMobile: '需要通知的通知手机号码', webhookUrl: 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=xxx-xxxxxx-xxxxxx', moreInfo:'额外的信息'
         }
         failure{
-            qyWechatNotification failNotify: true, mentionedId: '需要通知UserID', mentionedMobile: '需要通知的通知手机号码', webhookUrl: 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=xxx-xxxxxx-xxxxxx'
+            qyWechatNotification failNotify: true, mentionedId: '需要通知UserID', mentionedMobile: '需要通知的通知手机号码', webhookUrl: 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=xxx-xxxxxx-xxxxxx', moreInfo:'额外的信息'
         }
     }
 }
