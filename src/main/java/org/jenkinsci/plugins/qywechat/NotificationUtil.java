@@ -23,6 +23,7 @@ import org.jenkinsci.plugins.qywechat.model.NotificationConfig;
 import javax.net.ssl.SSLContext;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
+import java.util.Map;
 
 /**
  * 工具类
@@ -103,6 +104,19 @@ public class NotificationUtil {
             builder.deleteCharAt(builder.length()-1);
         }
         return builder.toString();
+    }
+
+    /**
+     * 将给定的原始字符串中的环境变量替换为环境变量结果
+     */
+    public static String replaceEnvs(String origin,EnvVars envVars){
+        for (Map.Entry<String, String> entry : envVars.entrySet()) {
+            String k = entry.getKey();
+            String v = entry.getValue();
+            origin = StringUtils.replace(origin, "${" + k + "}", v);
+            origin = StringUtils.replace(origin, "$"+k, v);
+        }
+        return origin;
     }
 
     /**

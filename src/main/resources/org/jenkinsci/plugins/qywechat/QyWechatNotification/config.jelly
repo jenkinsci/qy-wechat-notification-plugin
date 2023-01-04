@@ -13,4 +13,7 @@
     <f:entry title="通知手机号码" field="mentionedMobile" help="/plugin/qy-wechat-notification/help-globalConfig-mentionedMobile.html">
         <f:textbox />
     </f:entry>
+    <f:entry title="更多消息" field="moreInfo" help="/plugin/qy-wechat-notification/help-globalConfig-moreInfo.html">
+        <f:textarea />
+    </f:entry>
 </j:jelly>
