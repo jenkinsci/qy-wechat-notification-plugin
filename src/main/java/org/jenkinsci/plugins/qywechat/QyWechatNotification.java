@@ -38,6 +38,8 @@ public class QyWechatNotification extends Publisher implements SimpleBuildStep {
 
     private boolean failNotify;
 
+    private boolean onlyFailSendQyWechatNotify;
+
     private String projectName;
 
     @Extension
@@ -76,7 +78,9 @@ public class QyWechatNotification extends Publisher implements SimpleBuildStep {
         listener.getLogger().println("推送通知" + req);
 
         //执行推送
-        push(listener.getLogger(), config.webhookUrl, req, config);
+        if(!config.onlyFailSendQyWechatNotify) {
+            push(listener.getLogger(), config.webhookUrl, req, config);
+        }
         return true;
     }
 
@@ -104,16 +108,19 @@ public class QyWechatNotification extends Publisher implements SimpleBuildStep {
         BuildOverInfo buildInfo = new BuildOverInfo(this.projectName, run, config);
 
         String req = buildInfo.toJSONString();
-        listener.getLogger().println("推送通知" + req);
-
-        //推送结束通知
-        push(listener.getLogger(), config.webhookUrl, req, config);
-        listener.getLogger().println("项目运行结果[" + result + "]");
 
         //运行不成功
         if(result==null){
             return;
         }
+
+        //推送结束通知
+        if(!result.equals(Result.SUCCESS) || !config.onlyFailSendQyWechatNotify) {
+            listener.getLogger().println("推送通知" + req);
+            push(listener.getLogger(), config.webhookUrl, req, config);
+        }
+
+        listener.getLogger().println("项目运行结果[" + result + "]");
 
         //仅在失败的时候，才进行@
         if(!result.equals(Result.SUCCESS) || !config.failNotify){
@@ -182,6 +189,7 @@ public class QyWechatNotification extends Publisher implements SimpleBuildStep {
             config.moreInfo = moreInfo;
         }
         config.failNotify = failNotify;
+        config.onlyFailSendQyWechatNotify = onlyFailSendQyWechatNotify;
         //使用环境变量
         if(config.webhookUrl.contains("$")){
             String val = NotificationUtil.replaceMultipleEnvValue(config.webhookUrl, envVars);
@@ -225,6 +233,11 @@ public class QyWechatNotification extends Publisher implements SimpleBuildStep {
     }
 
     @DataBoundSetter
+    public void setOnlyFailSendQyWechatNotify(boolean onlyFailSendQyWechatNotify) {
+        this.onlyFailSendQyWechatNotify = onlyFailSendQyWechatNotify;
+    }
+
+    @DataBoundSetter
     public void setMoreInfo(String moreInfo){this.moreInfo = moreInfo;}
 
     public String getWebhookUrl() {
@@ -241,6 +254,10 @@ public class QyWechatNotification extends Publisher implements SimpleBuildStep {
 
     public boolean isFailNotify() {
         return failNotify;
+    }
+
+    public boolean isOnlyFailSendQyWechatNotify() {
+        return onlyFailSendQyWechatNotify;
     }
 
     public String getMoreInfo() {return moreInfo;}

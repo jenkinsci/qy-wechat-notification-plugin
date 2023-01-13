@@ -52,8 +52,13 @@ public class NotificationConfig {
     public Secret proxyPassword = null;
 
     /**
-     * 仅在失败通知
+     * 仅在失败通知 艾特通知
      */
     public boolean failNotify = false;
 
+
+    /**
+     * 仅失败的时候发送企业微信通知
+     */
+    public boolean onlyFailSendQyWechatNotify = false;
 }

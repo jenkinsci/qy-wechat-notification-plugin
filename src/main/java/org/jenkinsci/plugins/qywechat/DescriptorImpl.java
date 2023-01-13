@@ -81,6 +81,10 @@ public class DescriptorImpl extends BuildStepDescriptor<Publisher> {
         config.failNotify = failNotify;
     }
 
+    public void setOnlyFailSendQyWechatNotify(boolean onlyFailSendQyWechatNotify) {
+        config.onlyFailSendQyWechatNotify = onlyFailSendQyWechatNotify;
+    }
+
     public String getProxyHost() {
         return config.proxyHost;
     }
@@ -132,6 +136,7 @@ public class DescriptorImpl extends BuildStepDescriptor<Publisher> {
         unsaveConfig.proxyPassword = config.proxyPassword;
 
         unsaveConfig.failNotify = config.failNotify;
+        unsaveConfig.onlyFailSendQyWechatNotify = config.onlyFailSendQyWechatNotify;
         return unsaveConfig;
     }
 
