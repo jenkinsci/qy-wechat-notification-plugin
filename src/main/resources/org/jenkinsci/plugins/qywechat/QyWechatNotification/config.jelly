@@ -7,6 +7,9 @@
     <f:entry title="仅失败才@" field="failNotify" help="/plugin/qy-wechat-notification/help-globalConfig-failNotify.html">
         <f:checkbox />
     </f:entry>
+    <f:entry title="仅失败才企微通知" field="onlyFailSendQyWechatNotify" help="/plugin/qy-wechat-notification/help-globalConfig-onlyFailSendQyWechatNotify.html">
+        <f:checkbox />
+    </f:entry>
     <f:entry title="通知UserID" field="mentionedId" help="/plugin/qy-wechat-notification/help-globalConfig-mentionedId.html">
         <f:textbox />
     </f:entry>
