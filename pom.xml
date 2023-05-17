@@ -38,7 +38,7 @@
         <jenkins.version>2.303.1</jenkins.version>
         <java.level>8</java.level>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <jenkins.plugin.workflow.version>2.42</jenkins.plugin.workflow.version>
+        <jenkins.plugin.workflow.version>1295.v395eb_7400005</jenkins.plugin.workflow.version>
         <jenkins.plugin.structs.version>1.24</jenkins.plugin.structs.version>
         <jenkins.plugin.junit.version>1.53</jenkins.plugin.junit.version>
         <httpclientutil.version>1.0.4</httpclientutil.version>
