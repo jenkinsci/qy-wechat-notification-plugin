@@ -64,6 +64,7 @@ public class QyWechatNotification extends Publisher implements SimpleBuildStep {
             listener.getLogger().println("读取环境变量异常" + e.getMessage());
             envVars = new EnvVars();
         }
+        envVars.OverrideAll(PipelineEnvContext.get());
         envVars.forEach((k,v)->{
             listener.getLogger().println(k+":"+v);
         });
