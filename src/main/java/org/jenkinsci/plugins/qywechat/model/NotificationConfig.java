@@ -22,6 +22,11 @@ public class NotificationConfig {
     public String mentionedMobile = "";
 
     /**
+     * 是否显示change log
+     */
+    public boolean showChangeLog = false;
+
+    /**
      * 更多信息备注
      */
     public String moreInfo = "";

@@ -1,5 +1,6 @@
 package org.jenkinsci.plugins.qywechat;
 
+import hudson.scm.ChangeLogSet;
 import org.jenkinsci.plugins.qywechat.dto.BuildBeginInfo;
 import org.jenkinsci.plugins.qywechat.dto.BuildMentionedInfo;
 import org.jenkinsci.plugins.qywechat.dto.BuildOverInfo;
@@ -21,6 +22,9 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Consumer;
 
 /**
  * 企业微信构建通知
@@ -42,6 +46,10 @@ public class QyWechatNotification extends Publisher implements SimpleBuildStep {
 
     private String projectName;
 
+    private boolean showChangeLog;
+
+    private final List<String> changeLogs = new ArrayList<>();
+
     @Extension
     public static final DescriptorImpl DESCRIPTOR = new DescriptorImpl();
 
@@ -60,6 +68,10 @@ public class QyWechatNotification extends Publisher implements SimpleBuildStep {
         EnvVars envVars;
         try {
             envVars = build.getEnvironment(listener);
+            ChangeLogSet<? extends ChangeLogSet.Entry> changeSet = build.getChangeSet();
+            if (!changeSet.isEmptySet()) {
+                changeSet.forEach((Consumer<ChangeLogSet.Entry>) entry -> changeLogs.add(entry.getMsg()));
+            }
         } catch (Exception e) {
             listener.getLogger().println("读取环境变量异常" + e.getMessage());
             envVars = new EnvVars();
@@ -106,7 +118,7 @@ public class QyWechatNotification extends Publisher implements SimpleBuildStep {
 
         //构建结束通知
         BuildOverInfo buildInfo = new BuildOverInfo(this.projectName, run, config);
-
+        buildInfo.setChangeLogs(changeLogs);
         String req = buildInfo.toJSONString();
 
         //运行不成功
@@ -176,36 +188,33 @@ public class QyWechatNotification extends Publisher implements SimpleBuildStep {
      */
     public NotificationConfig getConfig(EnvVars envVars){
         NotificationConfig config = DESCRIPTOR.getUnsaveConfig();
-        if(StringUtils.isNotEmpty(webhookUrl)){
+        if (StringUtils.isNotEmpty(webhookUrl)){
             config.webhookUrl = webhookUrl;
         }
-        if(StringUtils.isNotEmpty(mentionedId)){
+        if (StringUtils.isNotEmpty(mentionedId)){
             config.mentionedId = mentionedId;
         }
-        if(StringUtils.isNotEmpty(mentionedMobile)){
+        if (StringUtils.isNotEmpty(mentionedMobile)){
             config.mentionedMobile = mentionedMobile;
         }
         if (StringUtils.isNotEmpty(moreInfo)){
             config.moreInfo = moreInfo;
         }
+        config.showChangeLog = showChangeLog;
         config.failNotify = failNotify;
         config.onlyFailSendQyWechatNotify = onlyFailSendQyWechatNotify;
         //使用环境变量
-        if(config.webhookUrl.contains("$")){
-            String val = NotificationUtil.replaceMultipleEnvValue(config.webhookUrl, envVars);
-            config.webhookUrl = val;
+        if (config.webhookUrl.contains("$")){
+            config.webhookUrl = NotificationUtil.replaceMultipleEnvValue(config.webhookUrl, envVars);
         }
-        if(config.mentionedId.contains("$")){
-            String val = NotificationUtil.replaceMultipleEnvValue(config.mentionedId, envVars);
-            config.mentionedId = val;
+        if (config.mentionedId.contains("$")){
+            config.mentionedId =NotificationUtil.replaceMultipleEnvValue(config.mentionedId, envVars);
         }
-        if(config.mentionedMobile.contains("$")){
-            String val = NotificationUtil.replaceMultipleEnvValue(config.mentionedMobile, envVars);
-            config.mentionedMobile = val;
+        if (config.mentionedMobile.contains("$")){
+            config.mentionedMobile = NotificationUtil.replaceMultipleEnvValue(config.mentionedMobile, envVars);
         }
-        if(config.moreInfo.contains("$")){
-            String val = NotificationUtil.replaceEnvs(config.moreInfo, envVars);
-            config.moreInfo = val;
+        if (config.moreInfo.contains("$")){
+            config.moreInfo = NotificationUtil.replaceEnvs(config.moreInfo, envVars);
         }
         return config;
     }
@@ -238,6 +247,11 @@ public class QyWechatNotification extends Publisher implements SimpleBuildStep {
     }
 
     @DataBoundSetter
+    public void setShowChangeLog(boolean showChangeLog) {
+        this.showChangeLog = showChangeLog;
+    }
+
+    @DataBoundSetter
     public void setMoreInfo(String moreInfo){this.moreInfo = moreInfo;}
 
     public String getWebhookUrl() {
@@ -261,5 +275,9 @@ public class QyWechatNotification extends Publisher implements SimpleBuildStep {
     }
 
     public String getMoreInfo() {return moreInfo;}
+
+    public boolean isShowChangeLog() {
+        return showChangeLog;
+    }
 }
 

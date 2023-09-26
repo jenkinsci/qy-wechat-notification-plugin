@@ -4,6 +4,9 @@
     <f:entry title="Webhook地址" field="webhookUrl" help="/plugin/qy-wechat-notification/help-globalConfig-webhookUrl.html">
         <f:textbox />
     </f:entry>
+    <f:entry title="显示Change Log" field="showChangeLog" help="/plugin/qy-wechat-notification/help-globalConfig-showChangeLog.html">
+        <f:checkbox checked="true"/>
+    </f:entry>
     <f:entry title="仅失败才@" field="failNotify" help="/plugin/qy-wechat-notification/help-globalConfig-failNotify.html">
         <f:checkbox />
     </f:entry>
