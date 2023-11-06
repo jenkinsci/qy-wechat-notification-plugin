@@ -66,6 +66,7 @@ public class QyWechatNotification extends Publisher implements SimpleBuildStep {
     @Override
     public boolean prebuild(AbstractBuild<?, ?> build, BuildListener listener) {
         EnvVars envVars;
+        changeLogs.clear();
         try {
             envVars = build.getEnvironment(listener);
             ChangeLogSet<? extends ChangeLogSet.Entry> changeSet = build.getChangeSet();
