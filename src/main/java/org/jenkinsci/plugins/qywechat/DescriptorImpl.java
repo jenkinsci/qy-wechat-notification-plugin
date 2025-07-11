@@ -11,7 +11,7 @@ import net.sf.json.JSONObject;
 import org.apache.commons.lang.StringUtils;
 import org.jenkinsci.Symbol;
 import org.kohsuke.stapler.QueryParameter;
-import org.kohsuke.stapler.StaplerRequest;
+import org.kohsuke.stapler.StaplerRequest2;
 
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
@@ -176,7 +176,7 @@ public class DescriptorImpl extends BuildStepDescriptor<Publisher> {
     }
 
     @Override
-    public boolean configure(StaplerRequest req, JSONObject json) throws FormException {
+    public boolean configure(StaplerRequest2 req, JSONObject json) throws FormException {
         config.webhookUrl = json.getString("webhookUrl");
         config.topicName = json.getString("topicName");
         config.mentionedId = json.getString("mentionedId");
