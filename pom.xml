@@ -6,7 +6,7 @@
             <dependency>
                 <groupId>io.jenkins.tools.bom</groupId>
                 <artifactId>bom-${jenkins.baseline}.x</artifactId>
-                <version>1763.v092b_8980a_f5e</version>
+                <version>5043.v855ff4819a_0f</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -28,7 +28,7 @@
     <parent>
         <groupId>org.jenkins-ci.plugins</groupId>
         <artifactId>plugin</artifactId>
-        <version>4.51</version>
+        <version>5.18</version>
         <relativePath />
     </parent>
     <artifactId>qy-wechat-notification</artifactId>
@@ -41,7 +41,7 @@
 
     <properties>
         <!-- https://www.jenkins.io/doc/developer/plugin-development/choosing-jenkins-baseline/ -->
-        <jenkins.baseline>2.346</jenkins.baseline>
+        <jenkins.baseline>2.479</jenkins.baseline>
         <jenkins.version>${jenkins.baseline}.3</jenkins.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jenkins.plugin.workflow.version>2.42</jenkins.plugin.workflow.version>
