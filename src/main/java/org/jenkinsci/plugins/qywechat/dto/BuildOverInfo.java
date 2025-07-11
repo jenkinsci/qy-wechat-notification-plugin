@@ -37,6 +37,11 @@ public class BuildOverInfo {
     private String topicName = "";
 
     /**
+     * 更多自定消息
+     */
+    private String moreInfo = "";
+    
+    /**
      * 执行结果
      */
     private Result result;
@@ -66,6 +71,9 @@ public class BuildOverInfo {
         if(config.topicName!=null){
             topicName = config.topicName;
         }
+        if (StringUtils.isNotEmpty(config.moreInfo)){
+            moreInfo = config.moreInfo;
+        }
         //结果
         result = run.getResult();
     }
@@ -78,6 +86,9 @@ public class BuildOverInfo {
         }
         content.append("<font color=\"info\">【" + this.projectName + "】</font>构建" + getStatus() + "\n");
         content.append(" >构建用时：<font color=\"comment\">" +  this.useTimeString + "</font>\n");
+        if (StringUtils.isNotEmpty(moreInfo)){
+            content.append(" >"+moreInfo+"\n");
+        }
         if(StringUtils.isNotEmpty(this.consoleUrl)) {
             content.append(" >[查看控制台](" + this.consoleUrl + ")");
         }
