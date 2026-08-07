@@ -3,12 +3,12 @@ package org.jenkinsci.plugins.qywechat.dto;
 import org.jenkinsci.plugins.qywechat.model.NotificationConfig;
 import hudson.model.Run;
 import net.sf.json.JSONObject;
-import org.apache.commons.lang.StringUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import hudson.Util;
 
 /**
  * `@`用户的通知
@@ -39,7 +39,7 @@ public class BuildMentionedInfo {
 
     public String toJSONString(){
         List<String> mentionedIdList = new ArrayList<>();
-        if(StringUtils.isNotEmpty(mentionedId)){
+        if(Util.fixEmpty(mentionedId) != null){
             String []ids = mentionedId.split(",");
             for(String id : ids){
                 if("all".equals(id.toLowerCase())){
@@ -49,7 +49,7 @@ public class BuildMentionedInfo {
             }
         }
         List<String> mentionedMobileList = new ArrayList<>();
-        if(StringUtils.isNotEmpty(mentionedMobile)){
+        if(Util.fixEmpty(mentionedMobile) != null){
             String []mobiles = mentionedMobile.split(",");
             for(String mobile : mobiles){
                 if("all".equals(mobile.toLowerCase())){

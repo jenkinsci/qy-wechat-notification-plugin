@@ -6,11 +6,11 @@ import hudson.model.AbstractBuild;
 import hudson.model.ParameterValue;
 import hudson.model.ParametersAction;
 import net.sf.json.JSONObject;
-import org.apache.commons.lang.StringUtils;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import hudson.Util;
 
 /**
  * 开始构建的通知信息
@@ -65,7 +65,7 @@ public class BuildBeginInfo {
         //控制台地址
         StringBuilder urlBuilder = new StringBuilder();
         String jenkinsUrl = NotificationUtil.getJenkinsUrl();
-        if(StringUtils.isNotEmpty(jenkinsUrl)){
+        if(Util.fixEmpty(jenkinsUrl) != null){
             String buildUrl = build.getUrl();
             urlBuilder.append(jenkinsUrl);
             if(!jenkinsUrl.endsWith("/")){
@@ -84,7 +84,7 @@ public class BuildBeginInfo {
         if(config.topicName!=null){
             topicName = config.topicName;
         }
-        if (StringUtils.isNotEmpty(config.moreInfo)){
+        if (Util.fixEmpty(config.moreInfo) != null){
             moreInfo = config.moreInfo;
         }
     }
@@ -113,16 +113,16 @@ public class BuildBeginInfo {
 
         //组装内容
         StringBuilder content = new StringBuilder();
-        if(StringUtils.isNotEmpty(topicName)){
+        if(Util.fixEmpty(topicName) != null){
             content.append(this.topicName);
         }
         content.append("<font color=\"info\">【" + this.projectName + "】</font>开始构建\n");
         content.append(" >构建参数：<font color=\"comment\">" + paramBuffer.toString() + "</font>\n");
         content.append(" >预计用时：<font color=\"comment\">" +  durationTimeStr + "</font>\n");
-        if (StringUtils.isNotEmpty(moreInfo)){
+        if (Util.fixEmpty(moreInfo) != null){
             content.append(" >"+moreInfo+"\n");
         }
-        if(StringUtils.isNotEmpty(this.consoleUrl)){
+        if(Util.fixEmpty(this.consoleUrl) != null){
             content.append(" >[查看控制台](" + this.consoleUrl + ")");
         }
 
