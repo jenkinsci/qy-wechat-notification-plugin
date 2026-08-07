@@ -5,10 +5,10 @@ import org.jenkinsci.plugins.qywechat.model.NotificationConfig;
 import hudson.model.Result;
 import hudson.model.Run;
 import net.sf.json.JSONObject;
-import org.apache.commons.lang.StringUtils;
 
 import java.util.HashMap;
 import java.util.Map;
+import hudson.Util;
 
 /**
  * 结束构建的通知信息
@@ -47,7 +47,7 @@ public class BuildOverInfo {
         //控制台地址
         StringBuilder urlBuilder = new StringBuilder();
         String jenkinsUrl = NotificationUtil.getJenkinsUrl();
-        if(StringUtils.isNotEmpty(jenkinsUrl)){
+        if(Util.fixEmpty(jenkinsUrl) != null){
             String buildUrl = run.getUrl();
             urlBuilder.append(jenkinsUrl);
             if(!jenkinsUrl.endsWith("/")){
@@ -73,12 +73,12 @@ public class BuildOverInfo {
     public String toJSONString(){
         //组装内容
         StringBuilder content = new StringBuilder();
-        if(StringUtils.isNotEmpty(topicName)){
+        if(Util.fixEmpty(topicName) != null){
             content.append(this.topicName);
         }
         content.append("<font color=\"info\">【" + this.projectName + "】</font>构建" + getStatus() + "\n");
         content.append(" >构建用时：<font color=\"comment\">" +  this.useTimeString + "</font>\n");
-        if(StringUtils.isNotEmpty(this.consoleUrl)) {
+        if(Util.fixEmpty(this.consoleUrl) != null) {
             content.append(" >[查看控制台](" + this.consoleUrl + ")");
         }
 

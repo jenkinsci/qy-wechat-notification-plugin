@@ -8,7 +8,6 @@ import hudson.tasks.Publisher;
 import hudson.util.FormValidation;
 import hudson.util.Secret;
 import net.sf.json.JSONObject;
-import org.apache.commons.lang.StringUtils;
 import org.jenkinsci.Symbol;
 import org.kohsuke.stapler.QueryParameter;
 import org.kohsuke.stapler.StaplerRequest;
@@ -16,6 +15,7 @@ import org.kohsuke.stapler.StaplerRequest;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.util.logging.Logger;
+import hudson.Util;
 
 /**
  * 数据绑定
@@ -151,7 +151,7 @@ public class DescriptorImpl extends BuildStepDescriptor<Publisher> {
     public FormValidation doTestProxy(@QueryParameter String proxyHost, @QueryParameter int proxyPort, @QueryParameter String proxyUsername, @QueryParameter String proxyPassword){
         String TEST_URL = "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=0";
 
-        if(StringUtils.isEmpty(proxyHost)){
+        if(Util.fixEmpty(proxyHost) == null){
             return FormValidation.error("服务器不能为空");
         }
 

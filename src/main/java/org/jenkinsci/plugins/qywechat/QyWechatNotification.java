@@ -13,7 +13,6 @@ import hudson.model.*;
 import hudson.tasks.BuildStepMonitor;
 import hudson.tasks.Publisher;
 import jenkins.tasks.SimpleBuildStep;
-import org.apache.commons.lang.StringUtils;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.DataBoundSetter;
 
@@ -21,6 +20,7 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
+import hudson.Util;
 
 /**
  * 企业微信构建通知
@@ -68,7 +68,7 @@ public class QyWechatNotification extends Publisher implements SimpleBuildStep {
             listener.getLogger().println(k+":"+v);
         });
         NotificationConfig config = getConfig(envVars);
-        if(StringUtils.isEmpty(config.webhookUrl)){
+        if(Util.fixEmpty(config.webhookUrl) == null){
             return true;
         }
         this.projectName = build.getProject().getFullDisplayName();
@@ -96,7 +96,7 @@ public class QyWechatNotification extends Publisher implements SimpleBuildStep {
     @Override
     public void perform(Run<?, ?> run, FilePath workspace, Launcher launcher, TaskListener listener) throws InterruptedException, IOException {
         NotificationConfig config = getConfig(run.getEnvironment(listener));
-        if(StringUtils.isEmpty(config.webhookUrl)){
+        if(Util.fixEmpty(config.webhookUrl) == null){
             return;
         }
         Result result = run.getResult();
@@ -125,7 +125,7 @@ public class QyWechatNotification extends Publisher implements SimpleBuildStep {
         //仅在失败的时候，才进行@
         if(!result.equals(Result.SUCCESS) || !config.failNotify){
             //没有填写UserId和手机号码
-            if(StringUtils.isEmpty(config.mentionedId) && StringUtils.isEmpty(config.mentionedMobile)){
+            if(Util.fixEmpty(config.mentionedId) == null && Util.fixEmpty(config.mentionedMobile) == null){
                 return;
             }
 
@@ -176,16 +176,16 @@ public class QyWechatNotification extends Publisher implements SimpleBuildStep {
      */
     public NotificationConfig getConfig(EnvVars envVars){
         NotificationConfig config = DESCRIPTOR.getUnsaveConfig();
-        if(StringUtils.isNotEmpty(webhookUrl)){
+        if(Util.fixEmpty(webhookUrl) != null){
             config.webhookUrl = webhookUrl;
         }
-        if(StringUtils.isNotEmpty(mentionedId)){
+        if(Util.fixEmpty(mentionedId) != null){
             config.mentionedId = mentionedId;
         }
-        if(StringUtils.isNotEmpty(mentionedMobile)){
+        if(Util.fixEmpty(mentionedMobile) != null){
             config.mentionedMobile = mentionedMobile;
         }
-        if (StringUtils.isNotEmpty(moreInfo)){
+        if (Util.fixEmpty(moreInfo) != null){
             config.moreInfo = moreInfo;
         }
         config.failNotify = failNotify;

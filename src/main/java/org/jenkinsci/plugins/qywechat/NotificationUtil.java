@@ -6,7 +6,6 @@ import com.arronlong.httpclientutil.exception.HttpProcessException;
 import hudson.EnvVars;
 import hudson.util.Secret;
 import jenkins.model.Jenkins;
-import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpHost;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
@@ -24,6 +23,7 @@ import javax.net.ssl.SSLContext;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Map;
+import hudson.Util;
 
 /**
  * 工具类
@@ -54,7 +54,7 @@ public class NotificationUtil {
         if(buildConfig.useProxy){
             HttpHost proxy = new HttpHost(buildConfig.proxyHost, buildConfig.proxyPort);
             //用户密码
-            if(StringUtils.isNotEmpty(buildConfig.proxyUsername) && buildConfig.proxyPassword != null){
+            if(Util.fixEmpty(buildConfig.proxyUsername) != null && buildConfig.proxyPassword != null){
                 // 设置认证
                 CredentialsProvider provider = new BasicCredentialsProvider();
                 provider.setCredentials(new AuthScope(proxy), new UsernamePasswordCredentials(buildConfig.proxyUsername, Secret.toString(buildConfig.proxyPassword)));
@@ -113,8 +113,8 @@ public class NotificationUtil {
         for (Map.Entry<String, String> entry : envVars.entrySet()) {
             String k = entry.getKey();
             String v = entry.getValue();
-            origin = StringUtils.replace(origin, "${" + k + "}", v);
-            origin = StringUtils.replace(origin, "$"+k, v);
+            origin = origin.replace("${" + k + "}", v);
+            origin = origin.replace("$"+k, v);
         }
         return origin;
     }
